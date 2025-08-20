@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🚀 Travel Light - AI-Powered Trip Planning
 
 A modern, intelligent travel planning application that creates personalized itineraries using AI and provides a beautiful, interactive user experience.
@@ -205,3 +206,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **Happy Travel Planning! ✈️🗺️**
 
 Made with ❤️ by the Travel Light Team
+=======
+# Travel-Light-AI
+AI-powered trip planning application with modern React UI, FastAPI backend, and intelligent itinerary generation
+>>>>>>> cc244337af7578f916d5e779aeaac2f165660283
