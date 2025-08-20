@@ -1,0 +1,66 @@
+name: Auto Commit and Push
+
+on:
+  # Manual trigger
+  workflow_dispatch:
+  
+  # Schedule (every day at 2 AM UTC)
+  schedule:
+    - cron: '0 2 * * *'
+  
+  # On push to main branch
+  push:
+    branches: [ main ]
+  
+  # On pull request
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  auto-commit:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: plan-lighter-ui/package-lock.json
+    
+    - name: Install dependencies
+      run: |
+        cd plan-lighter-ui
+        npm ci
+    
+    - name: Build project
+      run: |
+        cd plan-lighter-ui
+        npm run build
+    
+    - name: Run tests
+      run: |
+        cd plan-lighter-ui
+        npm run test --if-present
+    
+    - name: Auto commit and push
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        
+        # Add any new files
+        git add .
+        
+        # Check if there are changes to commit
+        if [[ -n $(git status --porcelain) ]]; then
+          git commit -m "🤖 Auto-commit: Update project files [skip ci]"
+          git push
+        else
+          echo "No changes to commit"
+        fi
