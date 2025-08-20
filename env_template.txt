@@ -1,0 +1,11 @@
+# Copy this to .env and fill in your API keys
+
+# OpenAI API Key (required)
+OPENAI_API_KEY=your_openai_api_key_here
+
+# Amadeus API Keys (optional - for hotel search)
+AMADEUS_API_KEY=your_amadeus_api_key_here
+AMADEUS_API_SECRET=your_amadeus_api_secret_here
+
+# AviationStack API Key (optional - for flight search)
+AVIATIONSTACK_API_KEY=your_aviationstack_api_key_here
